@@ -25,6 +25,10 @@ namespace Portal.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Employee> Employes { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<Result> Results { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<PossibleAnswer> PossibleAnswers { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
