@@ -27,7 +27,7 @@ namespace Portal.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(unicode: true),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -36,7 +36,7 @@ namespace Portal.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Condition = c.String(),
+                        Condition = c.String(unicode: true),
                         TestId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -48,7 +48,7 @@ namespace Portal.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Answer = c.String(),
+                        Answer = c.String(unicode: true),
                         Correct = c.Boolean(nullable: false),
                         QuestionId = c.Int(nullable: false),
                     })

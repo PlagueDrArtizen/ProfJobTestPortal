@@ -396,7 +396,7 @@ namespace Portal.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Tests");
         }
 
         //
@@ -453,7 +453,7 @@ namespace Portal.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Tests");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

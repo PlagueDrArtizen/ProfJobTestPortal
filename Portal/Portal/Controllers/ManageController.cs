@@ -15,15 +15,20 @@ namespace Portal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
 
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(
+            ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager,
+            ApplicationDbContext dbContext)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            DbContext = dbContext;
         }
 
         public ApplicationSignInManager SignInManager
@@ -50,6 +55,18 @@ namespace Portal.Controllers
             }
         }
 
+        public ApplicationDbContext DbContext
+        {
+            get
+            {
+                return _dbContext ?? HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            }
+            private set
+            {
+                _dbContext = value;
+            }
+        }
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -63,15 +80,23 @@ namespace Portal.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+            var tests = DbContext.Tests.ToList();
+            var test = tests.First();
+            var questions = test.Questions.ToList();
+            var question = questions.Last();
+
+
+
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                PhoneNumber = question.Condition,
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
             return View(model);
         }
 

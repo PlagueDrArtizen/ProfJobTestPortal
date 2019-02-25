@@ -14,7 +14,7 @@ namespace Portal.Models
         public string SystemUserId { get; set; }
         public ApplicationUser SystemUser { get; set; }
 
-        public ICollection<Result> Results { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
     }
 
     public class Test
@@ -22,8 +22,8 @@ namespace Portal.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Result> Results { get; set; }
-        public ICollection<Question> Questions { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 
     public class Result
@@ -46,7 +46,7 @@ namespace Portal.Models
         public int TestId { get; set; }
         public Test Test { get; set; }
 
-        public ICollection<PossibleAnswer> PossibleAnswers { get; set; }
+        public virtual ICollection<PossibleAnswer> PossibleAnswers { get; set; }
     }
 
     public class PossibleAnswer
