@@ -259,6 +259,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Tests\TestsListView.cshtml" />
+    <Content Include="Views\Tests\QuestionView.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

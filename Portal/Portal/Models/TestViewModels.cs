@@ -5,18 +5,19 @@ using System.Web;
 
 namespace Portal.Models
 {
-    public class TestViewModels
+    public class QuestionViewModel
     {
-
-        
-
+        public string TestName { get; set; }
+        public int QuestionNumber { get; set; }
+        public string Text { get; set; }
+        public int QuestionId { get; set; }
+        public IEnumerable<AnswerViewModel> Answers { get; set; }
     }
 
-    public class TestsListViewModel
+    public class AnswerViewModel
     {
-
-        public List<Test> Tests { get; set; }
-
-
+        public string Text { get; set; }
+        public bool IsSelected { get; set; }
+        public int AnswerId { get; set; }
     }
 }
