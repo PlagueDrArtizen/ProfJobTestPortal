@@ -11,6 +11,8 @@ namespace Portal.Models
         public int QuestionNumber { get; set; }
         public string Text { get; set; }
         public int QuestionId { get; set; }
+        public int TestId { get; set; }
+        public int UserAnswerId { get; set; }
         public IEnumerable<AnswerViewModel> Answers { get; set; }
     }
 

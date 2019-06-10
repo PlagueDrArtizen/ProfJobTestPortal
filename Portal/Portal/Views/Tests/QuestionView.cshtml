@@ -15,14 +15,15 @@
     <hr />
            
         
-       @using (Html.BeginForm("SubmitAndNext", "Tests", FormMethod.Post))
-        { 
-            @Html.HiddenFor(model => model.QuestionId)
+       @using (Html.BeginForm("Answer", "Tests", new { testId = Model.TestId}, FormMethod.Post))
+       {
+           @Html.HiddenFor(model => model.QuestionId)
+           @Html.HiddenFor(model => model.QuestionNumber)
         <dl class="dl-horizontal">
             @foreach (var answer in Model.Answers)
             {
                 <dt>
-                    @Html.RadioButtonFor(model => answer.AnswerId, answer.AnswerId)
+                    @Html.RadioButtonFor(model => model.UserAnswerId, answer.AnswerId)
                 </dt>
 
                 <dd>
