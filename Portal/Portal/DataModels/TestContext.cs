@@ -11,7 +11,7 @@ namespace Portal.DataModels
 
         public int QuestionNumber { get; set; }
 
-        public int QueriesCount { get; set; }
+        public int QuestionsCount { get; set; }
 
         public int[] UserAnswers { get; set; }
     }

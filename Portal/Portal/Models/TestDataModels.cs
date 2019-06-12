@@ -29,7 +29,8 @@ namespace Portal.Models
     public class Result
     {
         public int Id { get; set; }
-        public int Rating { get; set; }
+        public DateTime Date { get; set; }
+        public string Metadata { get; set; }
 
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }

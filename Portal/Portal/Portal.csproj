@@ -171,6 +171,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="DataModels\TestContext.cs" />
+    <Compile Include="DataModels\TestResultsMetadata.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,11 +183,16 @@
     <Compile Include="Migrations\201902241908475_SchemaApllying.Designer.cs">
       <DependentUpon>201902241908475_SchemaApllying.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906111123434_ResultUpdate.cs" />
+    <Compile Include="Migrations\201906111123434_ResultUpdate.Designer.cs">
+      <DependentUpon>201906111123434_ResultUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TestDataModels.cs" />
+    <Compile Include="Models\TestResultViewModel.cs" />
     <Compile Include="Models\TestViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -261,6 +267,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Tests\TestsListView.cshtml" />
     <Content Include="Views\Tests\QuestionView.cshtml" />
+    <Content Include="Views\Tests\TestResultView.cshtml" />
+    <Content Include="Views\Tests\UserTestsHistoryView.cshtml" />
+    <Content Include="Views\Tests\ForCopypaste.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -277,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902241908475_SchemaApllying.resx">
       <DependentUpon>201902241908475_SchemaApllying.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111123434_ResultUpdate.resx">
+      <DependentUpon>201906111123434_ResultUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

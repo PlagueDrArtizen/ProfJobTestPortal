@@ -17,15 +17,29 @@ namespace Portal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext dbContext)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            DbContext = dbContext;
+        }
+
+        public ApplicationDbContext DbContext
+        {
+            get
+            {
+                return _dbContext ?? HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            }
+            private set
+            {
+                _dbContext = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -159,15 +173,18 @@ namespace Portal.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var emploee = new Employee
+                    {
+                        Name = model.TabelNumber,
+                        SystemUserId = user.Id,
+                    };
 
-                    return RedirectToAction("Index", "Home");
+                    DbContext.Employes.Add(emploee);
+                    DbContext.SaveChanges();
+
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);                                       
+
+                    return RedirectToAction("Index", "Tests");
                 }
                 AddErrors(result);
             }

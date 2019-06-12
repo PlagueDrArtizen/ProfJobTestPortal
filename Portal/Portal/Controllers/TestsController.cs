@@ -89,6 +89,30 @@ namespace Portal.Controllers
             return result;
         }
 
+        public ActionResult TestResult(int testResultId)
+        {
+            var testResult = DbContext.Results.Where(x => x.Id == testResultId).First();
+            var viewModel = ConstructTestResultViewModel(testResult);
+
+            return View("TestResultView",viewModel);
+        }        
+
+        public ActionResult UserTestsHistory(string tabelNumber)
+        {
+            var viewModel = new List<TestResultViewModel>();
+            var emploee = DbContext.Employes.Where(x => x.Name == tabelNumber).First();
+            var emploeeTestsResults = DbContext.Results.Where(x => x.EmployeeId == emploee.Id).OrderByDescending(x => x.Date).ToList();
+            
+            foreach(var testResult in emploeeTestsResults)
+            {
+                var viewModelItem = ConstructTestResultViewModel(testResult);
+
+                viewModel.Add(viewModelItem);
+            }             
+
+            return View("UserTestsHistoryView", viewModel);
+        }
+
         [HttpPost]
         public ActionResult Answer(int testId, QuestionViewModel model)
         {
@@ -106,10 +130,72 @@ namespace Portal.Controllers
 
                 Response.Cookies.Add(new HttpCookie(ContextCookieKey, JsonConvert.SerializeObject(context)));
 
-                result = RedirectToAction("Question", new { testId = testId, questionNumber = model.QuestionNumber + 1 });
+                if (model.QuestionNumber < context.QuestionsCount)
+                {
+                    result = RedirectToAction("Question", new { testId = testId, questionNumber = model.QuestionNumber + 1 });
+                }
+                else
+                {
+                    int testResultId = CalculateAndSaveTestResults(User.Identity.Name, context);
+
+                    result = RedirectToAction("TestResult", new { testResultId = testResultId });
+                }
             }
 
             return result;
+        }
+
+        private int CalculateAndSaveTestResults(string emploeeNumber, TestContext context)
+        {
+            var test = DbContext.Tests.Where(x => x.Id == context.TestId).First();
+            var emploee = DbContext.Employes.Where(x => x.Name == emploeeNumber).First();
+            var testResult = new Result
+            {
+                EmployeeId = emploee.Id,
+                Date = DateTime.Now,
+                TestId = test.Id
+            };
+
+            int score = 0;
+            var questionList = new List<QuestionInformation>();
+            var questionData = test.Questions.ToList();
+
+            for (int i = 0; i < questionData.Count; i++)
+            {
+                var questionInformation = new QuestionInformation(); 
+
+                var rightAnswer = questionData[i].PossibleAnswers.Where(x => x.Correct).First();
+
+                if(context.UserAnswers[i] == rightAnswer.Id)
+                {
+                    score++;
+                    questionInformation.UserAnswer = rightAnswer.Answer;
+                    questionInformation.IsRightAnswer = true;
+                }
+                else
+                {
+                    var userAnswer = questionData[i].PossibleAnswers.Where(x => x.Id == context.UserAnswers[i]).First();
+                    questionInformation.UserAnswer = userAnswer.Answer;
+                    questionInformation.RightAnswer = rightAnswer.Answer;
+                    questionInformation.IsRightAnswer = false;
+                }
+
+                questionList.Add(questionInformation);
+            }
+
+            var testResultMetadata = new TestResultsInformation
+            {
+                TestOriginalName = test.Name,
+                Score = score,
+                Questions = questionList
+            };
+
+            testResult.Metadata = JsonConvert.SerializeObject(testResultMetadata);
+
+            DbContext.Results.Add(testResult);
+            DbContext.SaveChanges();
+
+            return testResult.Id;
         }
 
         private TestContext RetriveContext(int testId)
@@ -143,11 +229,34 @@ namespace Portal.Controllers
                     QuestionNumber = 1
                 };
 
-                result.QueriesCount = DbContext.Questions.Count(x => x.TestId == testId);
-                result.UserAnswers = new int[result.QueriesCount];
+                result.QuestionsCount = DbContext.Questions.Count(x => x.TestId == testId);
+                result.UserAnswers = new int[result.QuestionsCount];
             }
 
             return result;
+        }
+
+        private string FormatScore(int score, int count)
+        {
+            return $"{score / (double)count * 100}% ({score}/{count})";
+        }
+
+        private TestResultViewModel ConstructTestResultViewModel(Result testResult)
+        {
+            var test = DbContext.Tests.Where(x => x.Id == testResult.TestId).First();
+            var testResultMetadata = JsonConvert.DeserializeObject<TestResultsInformation>(testResult.Metadata);
+
+            var viewModel = new TestResultViewModel()
+            {
+                TestId = test.Id,
+                TestName = test.Name,
+                OriginalTestName = testResultMetadata.TestOriginalName,
+                Score = FormatScore(testResultMetadata.Score, testResultMetadata.Questions.Count),
+                Date = testResult.Date,
+                Question = testResultMetadata.Questions
+            };
+
+            return viewModel;
         }
     }
 }
