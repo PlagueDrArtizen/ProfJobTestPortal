@@ -5,22 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Результат Теста</h2>
+<h2>Результаты тестирования сотрудника @User.Identity.Name</h2>
 
 <div>
-    <h4>TestResultViewModel</h4>
+    <h4>@Html.DisplayFor(model => model.TestName)</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TestName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TestName)
-        </dd>
+    <dl class="dl-horizontal">    
 
         <dt>
-            @Html.DisplayNameFor(model => model.OriginalTestName)
+            Название на момент прохождения
         </dt>
 
         <dd>
@@ -28,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Дата прохождения
         </dt>
 
         <dd>
@@ -36,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Score)
+            Результат
         </dt>
 
         <dd>
@@ -44,4 +37,35 @@
         </dd>
 
     </dl>
+    <h5>
+        <b>
+            Детальный результат
+        </b>
+    </h5>
+
+    @for (int i = 0; i < Model.Question.Count; i++)
+    {
+        <h6>
+            <b>
+                #@(i+1)
+            </b>
+        </h6>
+        <dl>
+            <dt>
+                Ответ пользователя
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => Model.Question[i].UserAnswer)
+            </dd>
+            @if (!Model.Question[i].IsRightAnswer)
+            {
+            <dt>
+                Правильный ответ
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => Model.Question[i].RightAnswer)
+            </dd>
+            }
+        </dl>
+    }
 </div>
