@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace Portal.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public ActionResult Emploees()

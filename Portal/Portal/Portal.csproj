@@ -207,6 +207,7 @@
     <Content Include="App_Data\CleanDbFile\aspnet-Portal_log.ldf">
       <DependentUpon>aspnet-Portal.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\CreateAdminUser.sql" />
     <Content Include="App_Data\InitialTestData.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -270,7 +271,6 @@
     <Content Include="Views\Tests\QuestionView.cshtml" />
     <Content Include="Views\Tests\TestResultView.cshtml" />
     <Content Include="Views\Tests\UserTestsHistoryView.cshtml" />
-    <Content Include="Views\Tests\ForCopypaste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Admin\" />
