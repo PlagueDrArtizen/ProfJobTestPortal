@@ -23,6 +23,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Тесты", "Index", "Tests")</li>
                     <li>@Html.ActionLink("Результаты тестов", "UserTestsHistory", "Tests", new { tabelNumber = User.Identity.Name }, null)</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Сотрудники", "Emploees", "Admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

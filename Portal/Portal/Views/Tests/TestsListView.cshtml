@@ -7,7 +7,10 @@
 
 <h2>Тесты:</h2>
 
-
+@if(User.IsInRole("Admin"))
+{
+    <p>@Html.ActionLink("Создать тест", "Test", "Admin")</p>
+}
 <table class="table">
 
 @foreach (var item in Model) {
@@ -15,6 +18,13 @@
         <td>
             @Html.ActionLink(item.Name, "Question", new { testId=item.Id, questionNumber = 1 })
         </td>
+        @if(User.IsInRole("Admin"))
+        {
+            <td>
+                @Html.ActionLink("Изменить", "Test", "Admin", new { testId = item.Id }, null) | 
+                @Html.ActionLink("Удалить", "DeleteTest", "Admin", new { testId = item.Id }, new { onclick = $"return confirm('Вы уверены что хотите удалить тест - {item.Name}?');"})
+            </td>
+        }
     </tr>
 }
 
