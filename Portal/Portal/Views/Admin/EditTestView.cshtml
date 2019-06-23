@@ -30,3 +30,31 @@
         </div>
     </div>
 }
+@if (Model.TestId.HasValue)
+{
+
+    <h4>
+        Вопросы
+    </h4>
+    
+    <p>@Html.ActionLink("Создать вопрос", "Question", "Admin", new { testId = Model.TestId.Value }, null)</p>
+    
+    <table class="table">
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <b>
+                            #@(i + 1)
+                        </b>
+                        @Model.Questions[i].Text
+                    </td>
+                        <td>
+                            @Html.ActionLink("Изменить", "Question", "Admin", new { testId = Model.TestId.Value, questionId = Model.Questions[i].QuestionId }, null) |
+                            @Html.ActionLink("Удалить", "DeleteQuestion", "Admin", new { questionId = Model.Questions[i].QuestionId }, new { onclick = $"return confirm('Вы уверены что хотите удалить вопрос - {Model.Questions[i].Text}?');" })
+                        </td>
+                </tr>
+            }
+    </table>
+}
+

@@ -8,6 +8,11 @@ namespace Portal.Models
 {
     public class EditTestViewModel
     {
+        public EditTestViewModel()
+        {
+            Questions = new List<EditQuestionViewModel>();
+        }
+
         public int? TestId { get; set; }
 
         [Required]

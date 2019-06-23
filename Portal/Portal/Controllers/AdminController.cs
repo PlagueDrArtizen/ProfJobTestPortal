@@ -105,15 +105,134 @@ namespace Portal.Controllers
         }
 
         [HttpGet]
-        public ActionResult Question(int? questionId)
+        public ActionResult Question(int testId, int? questionId)
         {
-            return View();
+            var model = new EditQuestionViewModel
+            {
+                TestId = testId
+            };
+
+            if (questionId.HasValue)
+            {
+                var question = DbContext.Questions.Where(x => x.Id == questionId.Value).First();
+
+                model.QuestionId = question.Id;
+                model.Text = question.Condition;
+                model.Answers = DbContext.PossibleAnswers
+                    .Where(x => x.QuestionId == questionId).ToList()
+                    .Select(x => Map(x)).ToList();
+            }
+
+            return View("EditQuestionView", model);
         }
 
         [HttpPost]
         public ActionResult Question(EditQuestionViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var question = model.QuestionId.HasValue
+                    ? DbContext.Questions.Where(x => x.Id == model.QuestionId.Value).First()
+                    : new Question();
+
+                question.Condition = model.Text;
+
+                if (!model.QuestionId.HasValue)
+                {
+                    question.TestId = model.TestId;
+
+                    DbContext.Questions.Add(question);
+                }
+
+                DbContext.SaveChanges();
+
+                return RedirectToAction("Test", "Admin", new { testId = question.TestId });
+            }
+
+            return View("EditQuestionView", model);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteQuestion(int questionId)
+        {
+            var question = DbContext.Questions.Where(x => x.Id == questionId).First();
+
+            DbContext.Questions.Remove(question);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Test", "Admin", new { testId = question.TestId });
+        }
+
+        [HttpGet]
+        public ActionResult Answer(int questionId, int? answerId)
+        {
+            var model = new EditAnswerViewModel
+            {
+                QuestionId = questionId
+            };
+
+            if (answerId.HasValue)
+            {
+                var answer = DbContext.PossibleAnswers.Where(x => x.Id == answerId.Value).First();
+
+                model.AnswerId = answer.Id;
+                model.Text = answer.Answer;
+                model.Correct = answer.Correct;
+            }
+
+            return View("EditAnswerView", model);
+        }
+
+        [HttpPost]
+        public ActionResult Answer(EditAnswerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var previousCorrect = DbContext.PossibleAnswers.Where(x => x.QuestionId == model.QuestionId && x.Correct).FirstOrDefault();
+
+                if (previousCorrect != null && (!model.AnswerId.HasValue || previousCorrect.Id != model.AnswerId.Value))
+                {
+                    previousCorrect.Correct = false;
+                }
+
+                var answer = model.AnswerId.HasValue
+                    ? DbContext.PossibleAnswers.Where(x => x.Id == model.AnswerId.Value).First()
+                    : new PossibleAnswer();
+
+                answer.Answer = model.Text;
+
+                if (!model.AnswerId.HasValue)
+                {
+                    answer.QuestionId = model.QuestionId;
+
+                    DbContext.PossibleAnswers.Add(answer);
+                }
+
+                DbContext.SaveChanges();
+
+                return RedirectToAction("Question", "Admin", new {testId = answer.Question.TestId, questionId = answer.QuestionId });
+            }
+
+            return View("EditAnswerView", model);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteAnswer(int answerId)
+        {
+            var answer = DbContext.PossibleAnswers.Where(x => x.Id == answerId).First();
+            var question = DbContext.Questions.Where(x => x.Id == answer.QuestionId).First();
+            
+            if(answer.Correct && question.PossibleAnswers.Count > 1)
+            {
+                var newRightAnswer = DbContext.PossibleAnswers.Where(x => x.QuestionId == question.Id && !x.Correct).First();
+                newRightAnswer.Correct = true;
+                DbContext.PossibleAnswers.Attach(newRightAnswer);                
+            }
+
+            DbContext.PossibleAnswers.Remove(answer);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Question", "Admin", new { testId = question.TestId, questionId = answer.QuestionId });
         }
 
         private EditQuestionViewModel Map(Question entity)

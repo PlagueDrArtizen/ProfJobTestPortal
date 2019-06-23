@@ -174,8 +174,16 @@ namespace Portal.Controllers
                 }
                 else
                 {
-                    var userAnswer = questionData[i].PossibleAnswers.Where(x => x.Id == context.UserAnswers[i]).First();
-                    questionInformation.UserAnswer = userAnswer.Answer;
+                    if (context.UserAnswers[i] != 0)
+                    {
+                        var userAnswer = questionData[i].PossibleAnswers.Where(x => x.Id == context.UserAnswers[i]).First();
+                        questionInformation.UserAnswer = userAnswer.Answer;
+                    }
+                    else
+                    {
+                        questionInformation.UserAnswer = "Пользователь не ответил";
+                    }
+
                     questionInformation.RightAnswer = rightAnswer.Answer;
                     questionInformation.IsRightAnswer = false;
                 }

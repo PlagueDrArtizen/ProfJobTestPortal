@@ -277,6 +277,8 @@
     <Content Include="Views\Tests\UserTestsHistoryView.cshtml" />
     <Content Include="Views\Admin\EmploeesView.cshtml" />
     <Content Include="Views\Admin\EditTestView.cshtml" />
+    <Content Include="Views\Admin\EditQuestionView.cshtml" />
+    <Content Include="Views\Admin\EditAnswerView.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
