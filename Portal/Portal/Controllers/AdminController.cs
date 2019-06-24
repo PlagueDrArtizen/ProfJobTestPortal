@@ -189,6 +189,7 @@ namespace Portal.Controllers
             if (ModelState.IsValid)
             {
                 var previousCorrect = DbContext.PossibleAnswers.Where(x => x.QuestionId == model.QuestionId && x.Correct).FirstOrDefault();
+                var question = DbContext.Questions.Where(x => x.Id == model.QuestionId).First();
 
                 if (previousCorrect != null && (!model.AnswerId.HasValue || previousCorrect.Id != model.AnswerId.Value))
                 {
@@ -200,6 +201,7 @@ namespace Portal.Controllers
                     : new PossibleAnswer();
 
                 answer.Answer = model.Text;
+                answer.Correct = model.Correct;
 
                 if (!model.AnswerId.HasValue)
                 {
@@ -210,7 +212,7 @@ namespace Portal.Controllers
 
                 DbContext.SaveChanges();
 
-                return RedirectToAction("Question", "Admin", new {testId = answer.Question.TestId, questionId = answer.QuestionId });
+                return RedirectToAction("Question", "Admin", new {testId = question.TestId, questionId = answer.QuestionId });
             }
 
             return View("EditAnswerView", model);
@@ -225,8 +227,7 @@ namespace Portal.Controllers
             if(answer.Correct && question.PossibleAnswers.Count > 1)
             {
                 var newRightAnswer = DbContext.PossibleAnswers.Where(x => x.QuestionId == question.Id && !x.Correct).First();
-                newRightAnswer.Correct = true;
-                DbContext.PossibleAnswers.Attach(newRightAnswer);                
+                newRightAnswer.Correct = true;               
             }
 
             DbContext.PossibleAnswers.Remove(answer);

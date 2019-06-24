@@ -92,9 +92,10 @@ namespace Portal.Controllers
         public ActionResult TestResult(int testResultId)
         {
             var testResult = DbContext.Results.Where(x => x.Id == testResultId).First();
-            var viewModel = ConstructTestResultViewModel(testResult);
+            var emploee = DbContext.Employes.Where(x => x.Id == testResult.EmployeeId).First();
+            var viewModel = ConstructTestResultViewModel(testResult, emploee);
 
-            return View("TestResultView",viewModel);
+            return View("TestResultView", viewModel);
         }        
 
         public ActionResult UserTestsHistory(string tabelNumber)
@@ -105,10 +106,12 @@ namespace Portal.Controllers
             
             foreach(var testResult in emploeeTestsResults)
             {
-                var viewModelItem = ConstructTestResultViewModel(testResult);
+                var viewModelItem = ConstructTestResultViewModel(testResult, emploee);
 
                 viewModel.Add(viewModelItem);
-            }             
+            }
+
+            ViewBag.UserName = emploee.Name;
 
             return View("UserTestsHistoryView", viewModel);
         }
@@ -249,7 +252,7 @@ namespace Portal.Controllers
             return $"{score / (double)count * 100}% ({score}/{count})";
         }
 
-        private TestResultViewModel ConstructTestResultViewModel(Result testResult)
+        private TestResultViewModel ConstructTestResultViewModel(Result testResult, Employee emploee)
         {
             var test = DbContext.Tests.Where(x => x.Id == testResult.TestId).First();
             var testResultMetadata = JsonConvert.DeserializeObject<TestResultsInformation>(testResult.Metadata);
@@ -257,6 +260,7 @@ namespace Portal.Controllers
             var viewModel = new TestResultViewModel()
             {
                 TestId = test.Id,
+                UserName = emploee.Name,
                 TestName = test.Name,
                 OriginalTestName = testResultMetadata.TestOriginalName,
                 Score = FormatScore(testResultMetadata.Score, testResultMetadata.Questions.Count),

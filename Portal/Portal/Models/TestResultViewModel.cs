@@ -10,6 +10,8 @@ namespace Portal.Models
     {
         public int TestId { get; set; }
 
+        public string UserName { get; set; }
+
         public string TestName { get; set; }
 
         public string OriginalTestName { get; set; }

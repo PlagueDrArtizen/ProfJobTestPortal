@@ -34,3 +34,40 @@
         </div>
     </div>
 }
+
+@if (Model.QuestionId.HasValue)
+{
+
+    <h4>
+        Варианты ответов
+    </h4>
+
+    <p>@Html.ActionLink("Создать ответ", "Answer", "Admin", new { questionId = Model.QuestionId.Value }, null)</p>
+
+    <table class="table">
+        @for (int i = 0; i < Model.Answers.Count; i++)
+        {
+            <tr>
+                <td>
+                    <b>
+                        #@(i + 1)
+                    </b>
+                    @if (Model.Answers[i].Correct)
+                    {
+                        <b>
+                            @Model.Answers[i].Text
+                        </b>
+                    }
+                    else
+                    {
+                        @Model.Answers[i].Text
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Изменить", "Answer", "Admin", new { questionId = Model.QuestionId.Value, answerId = Model.Answers[i].AnswerId }, null) |
+                    @Html.ActionLink("Удалить", "DeleteAnswer", "Admin", new { answerId = Model.Answers[i].AnswerId }, new { onclick = $"return confirm('Вы уверены что хотите удалить вариант - {Model.Answers[i].Text}?');" })
+                </td>
+            </tr>
+        }
+    </table>
+}
