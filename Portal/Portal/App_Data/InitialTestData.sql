@@ -201,25 +201,14 @@ INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Ждать распоря
 GO
 
 /*Добавляем 19 вопрос к тест 1*/
-INSERT INTO Questions(Condition, TestId) VALUES(N'Какие действия работника, получившего травму на производстве?', 1);
-GO
-
-/*Добавляем ответы к 19 вопросу к тест 1*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Направиться срочно домой и при плохом самочувствии обратится врачу', 0, 19);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Направиться в медсанчасть предприятия', 1, 19);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Срочно сообщить мастеру и в службу охраны труда', 1, 19);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Попросить оказать помощь рядом работающего токаря', 0, 19); 
-GO
-
-/*Добавляем 20 вопрос к тест 1*/
 INSERT INTO Questions(Condition, TestId) VALUES(N'Для чего служит видимый контур заземления?', 1);
 GO
 
-/*Добавляем ответы к 20 вопросу к тест 1*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Для снятия напряжения, если произошло пробивка напряжения на корпус', 1, 20);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Чтобы не украли оборудования', 0, 20);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Низковольтовая  подача напряжения на оборудование', 0, 20);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Для визуального осмотра', 0, 20); 
+/*Добавляем ответы к 19 вопросу к тест 1*/
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Для снятия напряжения, если произошло пробивка напряжения на корпус', 1, 19);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Чтобы не украли оборудования', 0, 19);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Низковольтовая  подача напряжения на оборудование', 0, 19);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Для визуального осмотра', 0, 19); 
 GO
 
 /* Добавляем тест 2*/
@@ -231,10 +220,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'На работах с повышенной опасно
 GO
 	
 /*Добавляем ответы к 1 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'До начала выполнения должностных обязанностей и в дальнейшем один раз в год.', 1, 21);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Периодически раз в 3 года.', 0, 21);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Периодически раз в 5 лет.', 0, 21);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'По указанию администрации.', 0, 21); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'До начала выполнения должностных обязанностей и в дальнейшем один раз в год.', 1, 20);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Периодически раз в 3 года.', 0, 20);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Периодически раз в 5 лет.', 0, 20);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'По указанию администрации.', 0, 20); 
 GO
 
 /*Добавляем 2 вопрос к тест 2*/
@@ -242,10 +231,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Вводный инструктаж по охране т
 GO
 
 /*Добавляем ответы к 2 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Специалист по охране труда.', 1, 22);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Сотрудник отдела кадров.', 0, 22);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Непосредственный руководитель.', 0, 22);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Председатель профкома.', 0, 22);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Специалист по охране труда.', 1, 21);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Сотрудник отдела кадров.', 0, 21);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Непосредственный руководитель.', 0, 21);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Председатель профкома.', 0, 21);
 GO
 
 /*Добавляем 3 вопрос к тест 2*/
@@ -253,10 +242,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Повторный инструктаж по охране
 GO
 
 /*Добавляем ответы к 3 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В полугодие.', 1, 23);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В месяц.', 0, 23);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'На квартал.', 0, 23);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'По указанию государственного инспектора.', 0, 23); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В полугодие.', 1, 22);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В месяц.', 0, 22);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'На квартал.', 0, 22);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'По указанию государственного инспектора.', 0, 22); 
 GO
 
 /*Добавляем 4 вопрос к тест 2*/
@@ -264,10 +253,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Когда проводится целевой инстр
 GO
 
 /*Добавляем ответы к 4 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'При изменении технологии или после несчастного случая.', 0, 24);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'После выхода из перерыва.', 0, 24);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'При переводе работника из одного цеха в другой.', 0, 24);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'При направлении на выполнение разовой или временной работы', 1, 24); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'При изменении технологии или после несчастного случая.', 0, 23);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'После выхода из перерыва.', 0, 23);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'При переводе работника из одного цеха в другой.', 0, 23);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'При направлении на выполнение разовой или временной работы', 1, 23); 
 GO
 
 /*Добавляем 5 вопрос к тест 2*/
@@ -275,10 +264,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Кто может отменить предписание
 GO
 
 /*Добавляем ответы к 5 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Руководитель предприятия.', 1, 25);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Профсоюзный комитет.', 0, 25);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Суд.', 0, 25);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Прокуратура.', 0, 25); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Руководитель предприятия.', 1, 24);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Профсоюзный комитет.', 0, 24);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Суд.', 0, 24);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Прокуратура.', 0, 24); 
 GO
 
 /*Добавляем 6 вопрос к тест 2*/
@@ -286,10 +275,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Кем осуществляется расследован
 GO
 
 /*Добавляем ответы к 6 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Комиссией, назначенной руководителем предприятия.', 1, 26);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Отделом охраны труда.', 0, 26);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Профсоюзным комитетом.', 0, 26);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Отделом внутренних дел.', 0, 26); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Комиссией, назначенной руководителем предприятия.', 1, 25);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Отделом охраны труда.', 0, 25);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Профсоюзным комитетом.', 0, 25);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Отделом внутренних дел.', 0, 25); 
 GO
 
 /*Добавляем 7 вопрос к тест 2*/
@@ -297,10 +286,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Расследуется несчастный случай
 GO
 
 /*Добавляем ответы к 7 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В случае смерти потерпевшего.', 0, 27);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Расследуется, если с момента происшествия прошло не более одного месяца.', 0, 27);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Не расследуется.', 0, 27);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Расследуется по заявлению потерпевшего.', 1, 27); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В случае смерти потерпевшего.', 0, 26);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Расследуется, если с момента происшествия прошло не более одного месяца.', 0, 26);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Не расследуется.', 0, 26);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Расследуется по заявлению потерпевшего.', 1, 26); 
 GO
 
 /*Добавляем 8 вопрос к тест 2*/
@@ -308,10 +297,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'В каком размере предприятие пл
 GO
 
 /*Добавляем ответы к 8 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 5-кратном размере.', 0, 28);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 10-кратном размере.', 1, 28);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 20-кратном размере.', 0, 28);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 15-кратном размере.', 0, 28); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 5-кратном размере.', 0, 27);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 10-кратном размере.', 1, 27);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 20-кратном размере.', 0, 27);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В 15-кратном размере.', 0, 27); 
 GO
 
 /*Добавляем 9 вопрос к тест 2*/
@@ -319,10 +308,10 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'Кто подтверждает (устанавливае
 GO
 
 /*Добавляем ответы к 9 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Отдел охраны труда.', 0, 29);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Профком предприятия.', 0, 29);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Комиссия по аттестации рабочих мест.', 1, 29);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Органы соцстраха.', 0, 29); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Отдел охраны труда.', 0, 28);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Профком предприятия.', 0, 28);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Комиссия по аттестации рабочих мест.', 1, 28);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Органы соцстраха.', 0, 28); 
 GO
 
 /*Добавляем 10 вопрос к тест 2*/
@@ -330,8 +319,8 @@ INSERT INTO Questions(Condition, TestId) VALUES(N'С увеличением силы тока, прохо
 GO
 
 /*Добавляем ответы к 10 вопросу к тест 2*/
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В зависимости от ситуации', 0, 30);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Увеличивается', 1, 30);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Уменьшается.', 0, 30);
-INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Не изменяется.', 0, 30); 
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'В зависимости от ситуации', 0, 29);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Увеличивается', 1, 29);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Уменьшается.', 0, 29);
+INSERT INTO PossibleAnswers(Answer, Correct, QuestionId) VALUES (N'Не изменяется.', 0, 29); 
 GO
