@@ -5,6 +5,15 @@ using System.Web;
 
 namespace Portal.Models
 {
+    public class TestViewModel
+    {
+        public int TestId { get; set; }
+
+        public string Name { get; set; }
+
+        public bool IsPlayable { get; set; }
+    }
+
     public class QuestionViewModel
     {
         public string TestName { get; set; }

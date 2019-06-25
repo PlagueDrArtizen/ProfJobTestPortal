@@ -190,8 +190,8 @@ namespace Portal.Controllers
             {
                 var previousCorrect = DbContext.PossibleAnswers.Where(x => x.QuestionId == model.QuestionId && x.Correct).FirstOrDefault();
                 var question = DbContext.Questions.Where(x => x.Id == model.QuestionId).First();
-
-                if (previousCorrect != null && (!model.AnswerId.HasValue || previousCorrect.Id != model.AnswerId.Value))
+                
+                if (model.Correct && previousCorrect != null && (!model.AnswerId.HasValue || previousCorrect.Id != model.AnswerId.Value))
                 {
                     previousCorrect.Correct = false;
                 }

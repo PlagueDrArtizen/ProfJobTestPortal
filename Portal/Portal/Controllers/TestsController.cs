@@ -44,15 +44,23 @@ namespace Portal.Controllers
         public ActionResult Index()
         {
             var tests = DbContext.Tests.ToList();
+            var model = new List<TestViewModel>();
 
-            return View("TestsListView", tests);
+            foreach(var test in tests)
+            {
+                var modelItem = CreateTestViewModel(test);
+
+                model.Add(modelItem);
+            }
+
+            return View("TestsListView", model);
         }
 
         [Route("/{testId}/query/{queryNumber}")]
         public ActionResult Question(int testId, int questionNumber)
         {
             ActionResult result = null;
-            TestContext context = RetriveOrCreateContext(testId);
+            TestContext context = RetriveOrCreateContext(testId, questionNumber);
             var test = DbContext.Tests.FirstOrDefault(x => x.Id == testId);
 
             if (test == null)
@@ -228,11 +236,11 @@ namespace Portal.Controllers
             return result;
         }
 
-        private TestContext RetriveOrCreateContext(int testId)
+        private TestContext RetriveOrCreateContext(int testId, int questionNumber)
         {
             TestContext result = RetriveContext(testId);
 
-            if (result == null)
+            if (result == null || questionNumber == 1)
             {
                 result = new TestContext()
                 {
@@ -260,6 +268,7 @@ namespace Portal.Controllers
             var viewModel = new TestResultViewModel()
             {
                 TestId = test.Id,
+                TestResultId = testResult.Id,
                 UserName = emploee.Name,
                 TestName = test.Name,
                 OriginalTestName = testResultMetadata.TestOriginalName,
@@ -269,6 +278,34 @@ namespace Portal.Controllers
             };
 
             return viewModel;
+        }
+
+        private TestViewModel CreateTestViewModel(Test test)
+        {
+            var questions = DbContext.Questions.Where(x => x.TestId == test.Id).ToList();
+            var model = new TestViewModel
+            {
+                TestId = test.Id,
+                Name = test.Name,
+                IsPlayable = true
+            };
+
+            if(questions.Count == 0)
+            {
+                model.IsPlayable = false;
+            }
+            else
+            {
+                foreach(var question in questions)
+                {
+                    if(DbContext.PossibleAnswers.Count(x => x.QuestionId == question.Id && x.Correct) == 0)
+                    {
+                        model.IsPlayable = false;
+                    }
+                }
+            }
+
+            return model;
         }
     }
 }
